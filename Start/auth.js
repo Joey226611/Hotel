@@ -1,11 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-console.log("🔥 AUTH JS GELADEN");
+  getDatabase,
+  ref,
+  set,
+  get,
+  child
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
@@ -18,50 +18,44 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const db = getDatabase(app);
 
-const toEmail = (u) => u + "@hotel.local";
+// 💾 REGISTER
+document.getElementById("registerBtn").addEventListener("click", () => {
 
-window.addEventListener("DOMContentLoaded", () => {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-  console.log("📦 DOM READY");
+  if (!username || !password) return;
 
-  const u = document.getElementById("username");
-  const p = document.getElementById("password");
-  const loginBtn = document.getElementById("loginBtn");
-  const registerBtn = document.getElementById("registerBtn");
-  const status = document.getElementById("status");
+  set(ref(db, "users/" + username), {
+    password: password
+  });
 
-  if (!u || !p || !loginBtn || !registerBtn) {
-    console.log("❌ ELEMENTS MISSING", { u, p, loginBtn, registerBtn });
+  document.getElementById("status").innerText = "Account gemaakt 🔥";
+});
+
+// 🔐 LOGIN
+document.getElementById("loginBtn").addEventListener("click", async () => {
+
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  const dbRef = ref(db);
+
+  const snapshot = await get(child(dbRef, "users/" + username));
+
+  if (!snapshot.exists()) {
+    document.getElementById("status").innerText = "User bestaat niet ❌";
     return;
   }
 
-  loginBtn.addEventListener("click", () => {
-    console.log("LOGIN CLICK");
+  const data = snapshot.val();
 
-    signInWithEmailAndPassword(auth, toEmail(u.value), p.value)
-      .then(() => {
-        status.innerText = "Welkom 👋";
-        window.location.href = "../dashboard.html";
-      })
-      .catch(err => {
-        console.log(err);
-        status.innerText = err.message;
-      });
-  });
-
-  registerBtn.addEventListener("click", () => {
-    console.log("REGISTER CLICK");
-
-    createUserWithEmailAndPassword(auth, toEmail(u.value), p.value)
-      .then(() => {
-        status.innerText = "Account gemaakt 🔥";
-      })
-      .catch(err => {
-        console.log(err);
-        status.innerText = err.message;
-      });
-  });
-
+  if (data.password === password) {
+    document.getElementById("status").innerText = "Welkom 👋";
+    window.location.href = "../dashboard.html";
+  } else {
+    document.getElementById("status").innerText = "Wachtwoord fout ❌";
+  }
 });
