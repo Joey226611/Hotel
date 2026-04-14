@@ -1,11 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getDatabase,
-  ref,
-  set,
-  get,
-  child
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+console.log("🔥 Firebase Google Auth loaded");
 
 const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
@@ -18,44 +18,35 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-// 💾 REGISTER
-document.getElementById("registerBtn").addEventListener("click", () => {
+// 🔐 Google login
+document.addEventListener("DOMContentLoaded", () => {
 
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const btn = document.getElementById("googleLoginBtn");
 
-  if (!username || !password) return;
-
-  set(ref(db, "users/" + username), {
-    password: password
-  });
-
-  document.getElementById("status").innerText = "Account gemaakt 🔥";
-});
-
-// 🔐 LOGIN
-document.getElementById("loginBtn").addEventListener("click", async () => {
-
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-
-  const dbRef = ref(db);
-
-  const snapshot = await get(child(dbRef, "users/" + username));
-
-  if (!snapshot.exists()) {
-    document.getElementById("status").innerText = "User bestaat niet ❌";
+  if (!btn) {
+    console.log("❌ Google button not found");
     return;
   }
 
-  const data = snapshot.val();
+  btn.addEventListener("click", () => {
 
-  if (data.password === password) {
-    document.getElementById("status").innerText = "Welkom 👋";
-    window.location.href = "../dashboard.html";
-  } else {
-    document.getElementById("status").innerText = "Wachtwoord fout ❌";
-  }
+    signInWithPopup(auth, provider)
+      .then((result) => {
+
+        const user = result.user;
+
+        console.log("✅ Logged in:", user.displayName);
+
+        window.location.href = "../dashboard.html";
+
+      })
+      .catch((error) => {
+        console.log("❌ Google login error:", error);
+      });
+
+  });
+
 });
