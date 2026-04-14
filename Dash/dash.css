@@ -1,0 +1,48 @@
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#000,#111,#1a1a1a);
+  color:white;
+}
+
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#000;
+  border-bottom:1px solid gold;
+}
+
+.logo {
+  font-size:28px;
+  color:gold;
+  font-weight:bold;
+}
+
+.user-box {
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.user-box img {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:2px solid gold;
+}
+
+.logout {
+  background:gold;
+  border:none;
+  padding:10px 20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.welcome {
+  text-align:center;
+  margin-top:100px;
+  font-size:40px;
+}
