@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hotel Access</title>
-
-  <link rel="stylesheet" href="style.css">
+  <title>TEST</title>
 </head>
-
 <body>
 
-  <div class="background"></div>
+  <input id="username" placeholder="username">
+  <input id="password" placeholder="password">
 
-  <div class="login-box">
-    <h1>HOTEL ACCESS</h1>
-    <p>Secure login portal</p>
+  <button id="btn">TEST</button>
 
-    <!-- ⚠️ IDs FIXED -->
-<input id="username" type="text">
-<input id="password" type="password">
+  <script>
+    document.getElementById("btn").addEventListener("click", () => {
+      const u = document.getElementById("username");
+      const p = document.getElementById("password");
 
-    <button onclick="login()">LOGIN</button>
-    <button onclick="register()">CREATE ACCOUNT</button>
+      console.log("U:", u);
+      console.log("P:", p);
 
-    <div id="status"></div>
-  </div>
-
-  <script type="module" src="auth.js"></script>
+      alert(u.value + " / " + p.value);
+    });
+  </script>
 
 </body>
 </html>
