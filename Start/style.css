@@ -1,4 +1,3 @@
-/* 🌌 FULL SCREEN */
 body {
   margin: 0;
   height: 100vh;
@@ -10,7 +9,6 @@ body {
   background: black;
 }
 
-/* 🌟 animated background */
 .background {
   position: absolute;
   width: 200%;
@@ -28,7 +26,6 @@ body {
   100% { transform: translate(10%, 10%) scale(1.2); }
 }
 
-/* 🧊 login box glass effect */
 .login-box {
   position: relative;
   width: 340px;
@@ -42,8 +39,7 @@ body {
   box-shadow: 0 0 40px rgba(212,175,55,0.3);
 
   text-align: center;
-
-  animation: fadeIn 1.2s ease;
+  animation: fadeIn 1s ease;
 }
 
 @keyframes fadeIn {
@@ -51,20 +47,16 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 🏨 text */
 h1 {
   color: #d4af37;
   letter-spacing: 2px;
-  margin-bottom: 5px;
 }
 
 p {
   color: #aaa;
   font-size: 12px;
-  margin-bottom: 20px;
 }
 
-/* ✏️ inputs */
 input {
   width: 100%;
   padding: 12px;
@@ -75,8 +67,8 @@ input {
 
   background: rgba(255,255,255,0.05);
   color: white;
-
   outline: none;
+
   transition: 0.3s;
 }
 
@@ -86,7 +78,6 @@ input:focus {
   transform: scale(1.02);
 }
 
-/* 🔥 buttons */
 button {
   width: 100%;
   padding: 12px;
@@ -101,50 +92,11 @@ button {
 
   cursor: pointer;
   transition: 0.3s;
-  position: relative;
-  overflow: hidden;
 }
 
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 25px rgba(212,175,55,0.6);
-}
-
-/* ✨ shine effect */
-button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.2);
-  transform: skewX(-25deg);
-}
-
-button:hover::after {
-  animation: shine 0.8s;
-}
-
-@keyframes shine {
-  100% { left: 200%; }
-}
-
-/* 🌟 particles */
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #d4af37;
-  border-radius: 50%;
-  opacity: 0.4;
-  animation: float 6s infinite ease-in-out;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); opacity: 0.2; }
-  50% { opacity: 0.8; }
-  100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 #status {
