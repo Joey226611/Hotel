@@ -1,11 +1,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { 
+import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  set,
+  get,
+  child
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// 🔥 JOUW FIREBASE CONFIG
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
   authDomain: "hotelreception.firebaseapp.com",
@@ -16,33 +23,44 @@ const firebaseConfig = {
   appId: "1:162982201655:web:e7730850e09d3670d032b2"
 };
 
-// Init Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getDatabase(app);
 
-// LOGIN
-window.login = function () {
-  const email = document.getElementById("email").value;
+// REGISTER (USERNAME)
+window.register = function () {
+  const username = document.getElementById("email").value; // hergebruikt input
   const password = document.getElementById("password").value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      document.getElementById("status").innerText = "Login success! 🚀";
-      window.location.href = "../dashboard.html"; // later aanpassen
+  const email = username + "@hotel.local";
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+
+      // opslaan username in database
+      set(ref(db, "users/" + user.uid), {
+        username: username
+      });
+
+      document.getElementById("status").innerText = "Account gemaakt 🔥";
     })
     .catch((error) => {
       document.getElementById("status").innerText = error.message;
     });
 };
 
-// REGISTER
-window.register = function () {
-  const email = document.getElementById("email").value;
+// LOGIN (USERNAME)
+window.login = function () {
+  const username = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  createUserWithEmailAndPassword(auth, email, password)
+  const email = username + "@hotel.local";
+
+  signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-      document.getElementById("status").innerText = "Account gemaakt 🔥";
+      document.getElementById("status").innerText = "Welkom 👋";
+      window.location.href = "../dashboard.html";
     })
     .catch((error) => {
       document.getElementById("status").innerText = error.message;
