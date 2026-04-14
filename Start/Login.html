@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
-  <title>TEST</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Access</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <input id="username" placeholder="username">
-  <input id="password" placeholder="password">
+  <!-- 🌌 background -->
+  <div class="background"></div>
 
-  <button id="btn">TEST</button>
+  <!-- 🧊 login container -->
+  <div class="login-box">
 
-  <script>
-    document.getElementById("btn").addEventListener("click", () => {
-      const u = document.getElementById("username");
-      const p = document.getElementById("password");
+    <h1>HOTEL ACCESS</h1>
+    <p>Secure login portal</p>
 
-      console.log("U:", u);
-      console.log("P:", p);
+    <!-- 🔥 INPUTS (MUST MATCH JS) -->
+    <input id="username" type="text" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
 
-      alert(u.value + " / " + p.value);
-    });
-  </script>
+    <!-- 🔘 BUTTONS (NO onclick!) -->
+    <button id="loginBtn">LOGIN</button>
+    <button id="registerBtn">CREATE ACCOUNT</button>
+
+    <!-- 📢 status -->
+    <div id="status"></div>
+
+  </div>
+
+  <!-- 🔐 Firebase script -->
+  <script type="module" src="auth.js"></script>
 
 </body>
 </html>
