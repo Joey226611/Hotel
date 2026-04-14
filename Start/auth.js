@@ -26,19 +26,25 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
-// 🧠 username → fake email system
+// 🧠 username → fake email
 function toEmail(username) {
   return username + "@hotel.local";
 }
 
 // 🔐 REGISTER
 window.register = function () {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const usernameEl = document.getElementById("username");
+  const passwordEl = document.getElementById("password");
 
-  const email = toEmail(username);
+  if (!usernameEl || !passwordEl) {
+    document.getElementById("status").innerText = "Input error ❌";
+    return;
+  }
 
-  createUserWithEmailAndPassword(auth, email, password)
+  const username = usernameEl.value;
+  const password = passwordEl.value;
+
+  createUserWithEmailAndPassword(auth, toEmail(username), password)
     .then((userCredential) => {
 
       set(ref(db, "users/" + userCredential.user.uid), {
@@ -54,12 +60,18 @@ window.register = function () {
 
 // 🚀 LOGIN
 window.login = function () {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const usernameEl = document.getElementById("username");
+  const passwordEl = document.getElementById("password");
 
-  const email = toEmail(username);
+  if (!usernameEl || !passwordEl) {
+    document.getElementById("status").innerText = "Input error ❌";
+    return;
+  }
 
-  signInWithEmailAndPassword(auth, email, password)
+  const username = usernameEl.value;
+  const password = passwordEl.value;
+
+  signInWithEmailAndPassword(auth, toEmail(username), password)
     .then(() => {
       document.getElementById("status").innerText = "Welkom 👋";
       window.location.href = "../dashboard.html";
