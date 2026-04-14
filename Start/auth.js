@@ -4,15 +4,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 import {
   getDatabase,
   ref,
-  set,
-  get,
-  child
+  set
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// Firebase config
+// 🔥 Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
   authDomain: "hotelreception.firebaseapp.com",
@@ -27,19 +26,22 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
-// REGISTER (USERNAME)
+// 🧠 username → fake email system
+function toEmail(username) {
+  return username + "@hotel.local";
+}
+
+// 🔐 REGISTER
 window.register = function () {
-  const username = document.getElementById("email").value; // hergebruikt input
+  const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const email = username + "@hotel.local";
+  const email = toEmail(username);
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
 
-      // opslaan username in database
-      set(ref(db, "users/" + user.uid), {
+      set(ref(db, "users/" + userCredential.user.uid), {
         username: username
       });
 
@@ -50,12 +52,12 @@ window.register = function () {
     });
 };
 
-// LOGIN (USERNAME)
+// 🚀 LOGIN
 window.login = function () {
-  const username = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const email = username + "@hotel.local";
+  const email = toEmail(username);
 
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
