@@ -5,13 +5,6 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-  getDatabase,
-  ref,
-  set
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-// 🔥 Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
   authDomain: "hotelreception.firebaseapp.com",
@@ -24,59 +17,41 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(app);
 
 // 🧠 username → fake email
-function toEmail(username) {
-  return username + "@hotel.local";
-}
+const toEmail = (u) => u + "@hotel.local";
 
-// 🔐 REGISTER
-window.register = function () {
-  const usernameEl = document.getElementById("username");
-  const passwordEl = document.getElementById("password");
+window.addEventListener("DOMContentLoaded", () => {
 
-  if (!usernameEl || !passwordEl) {
-    document.getElementById("status").innerText = "Input error ❌";
+  const u = document.getElementById("username");
+  const p = document.getElementById("password");
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
+  const status = document.getElementById("status");
+
+  // 💥 safety check
+  if (!u || !p || !loginBtn || !registerBtn) {
+    console.log("Missing elements:", { u, p, loginBtn, registerBtn });
     return;
   }
 
-  const username = usernameEl.value;
-  const password = passwordEl.value;
+  // 🚀 LOGIN
+  loginBtn.addEventListener("click", () => {
+    signInWithEmailAndPassword(auth, toEmail(u.value), p.value)
+      .then(() => {
+        status.innerText = "Welkom 👋";
+        window.location.href = "../dashboard.html";
+      })
+      .catch(err => status.innerText = err.message);
+  });
 
-  createUserWithEmailAndPassword(auth, toEmail(username), password)
-    .then((userCredential) => {
+  // 🔐 REGISTER
+  registerBtn.addEventListener("click", () => {
+    createUserWithEmailAndPassword(auth, toEmail(u.value), p.value)
+      .then(() => {
+        status.innerText = "Account gemaakt 🔥";
+      })
+      .catch(err => status.innerText = err.message);
+  });
 
-      set(ref(db, "users/" + userCredential.user.uid), {
-        username: username
-      });
-
-      document.getElementById("status").innerText = "Account gemaakt 🔥";
-    })
-    .catch((error) => {
-      document.getElementById("status").innerText = error.message;
-    });
-};
-
-// 🚀 LOGIN
-window.login = function () {
-  const usernameEl = document.getElementById("username");
-  const passwordEl = document.getElementById("password");
-
-  if (!usernameEl || !passwordEl) {
-    document.getElementById("status").innerText = "Input error ❌";
-    return;
-  }
-
-  const username = usernameEl.value;
-  const password = passwordEl.value;
-
-  signInWithEmailAndPassword(auth, toEmail(username), password)
-    .then(() => {
-      document.getElementById("status").innerText = "Welkom 👋";
-      window.location.href = "../dashboard.html";
-    })
-    .catch((error) => {
-      document.getElementById("status").innerText = error.message;
-    });
-};
+});
