@@ -1,1 +1,28 @@
-comeslater
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotel Login</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1 class="title">Hotel Reception</h1>
+    <p class="subtitle">Login om verder te gaan</p>
+
+    <input type="email" id="email" placeholder="E-mail" />
+    <input type="password" id="password" placeholder="Wachtwoord" />
+
+    <button onclick="login()">Login</button>
+    <button class="secondary" onclick="register()">Account maken</button>
+
+    <p id="status"></p>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module" src="auth.js"></script>
+
+</body>
+</html>
