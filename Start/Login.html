@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Access</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="login-container">
-    <h1 class="title">Hotel Reception</h1>
-    <p class="subtitle">Login om verder te gaan</p>
+  <!-- 🌌 animated background -->
+  <div class="background"></div>
 
-    <input type="email" id="email" placeholder="E-mail" />
-    <input type="password" id="password" placeholder="Wachtwoord" />
+  <!-- 🌟 particles -->
+  <div class="particle" style="left:10%; animation-delay:0s;"></div>
+  <div class="particle" style="left:30%; animation-delay:2s;"></div>
+  <div class="particle" style="left:60%; animation-delay:4s;"></div>
+  <div class="particle" style="left:80%; animation-delay:1s;"></div>
 
-    <button onclick="login()">Login</button>
-    <button class="secondary" onclick="register()">Account maken</button>
+  <!-- 🧊 login box -->
+  <div class="login-box">
+    <h1>HOTEL ACCESS</h1>
+    <p>Secure login portal</p>
 
-    <p id="status"></p>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">LOGIN</button>
+    <button onclick="register()">CREATE ACCOUNT</button>
+
+    <div id="status"></div>
   </div>
 
-  <!-- Firebase -->
   <script type="module" src="auth.js"></script>
 
 </body>
