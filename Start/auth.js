@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log("✅ Logged in:", user.displayName);
 
-        window.location.href = "../dashboard.html";
+        window.location.href = "../Dash/dashboard.html";
 
       })
       .catch((error) => {
