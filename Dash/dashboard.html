@@ -8,25 +8,28 @@
 
 <body>
 
-<script type="module" src="guard.js"></script>
+  <div class="topbar">
+    <div class="logo">HOTEL</div>
 
-<header class="header">
-  <div class="logo">HOTEL</div>
+    <div class="user">
+      <img id="userPhoto" />
+      <div>
+        <div id="userName">Loading...</div>
+        <small id="userEmail"></small>
+      </div>
 
-  <div class="user-box">
-    <img id="userPhoto">
-    <div>
-      <div id="userName"></div>
-      <div id="userEmail"></div>
+      <button onclick="logoutUser()">Logout</button>
     </div>
-    <button id="logoutBtn" class="logout">Logout</button>
   </div>
-</header>
 
-<div class="welcome">
-  Welcome to the Hotel Dashboard 🏨
-</div>
+  <div class="hero">
+    <h1>Welcome back 👋</h1>
+    <p>Your luxury dashboard is ready</p>
+  </div>
 
-<script type="module" src="dash.js"></script>
+  <script type="module" src="./firebase-init.js"></script>
+  <script type="module" src="./auth-guard.js"></script>
+  <script type="module" src="./logout.js"></script>
+
 </body>
 </html>
