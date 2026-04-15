@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dash.css">
+</head>
+
+<body>
+
+<script type="module" src="./auth-guard.js"></script>
+
+<div class="topbar">
+  <div class="logo">HOTEL</div>
+
+  <div class="user">
+    <img id="userPhoto">
+    <div>
+      <div id="userName"></div>
+      <small id="userEmail"></small>
+    </div>
+
+    <button onclick="logoutUser()">Logout</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>Welcome 👋</h1>
+</div>
+
+<script type="module" src="./dashboard.js"></script>
+<script type="module" src="./logout.js"></script>
+
+</body>
+</html>
