@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* 🔥 TOPBAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: gold;
+}
+
+/* 👤 USER BOX */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid gold;
+  object-fit: cover;
+}
+
+.user div {
+  line-height: 1.2;
+}
+
+.user small {
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+/* 🔘 BUTTON */
+.user button {
+  margin-left: 10px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  background: gold;
+  color: black;
+  font-weight: bold;
+
+  transition: 0.2s;
+}
+
+.user button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px gold;
+}
+
+/* ✨ HERO */
+.hero {
+  text-align: center;
+  margin-top: 120px;
+  animation: fadeIn 1s ease;
+}
+
+.hero h1 {
+  font-size: 52px;
+  margin: 0;
+
+  background: linear-gradient(90deg, gold, white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  opacity: 0.6;
+  margin-top: 10px;
+}
+
+/* ✨ ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 💎 GLASS CARD FUTURE USE */
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,215,0,0.2);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
