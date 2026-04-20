@@ -2,74 +2,76 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Hotel Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/Hotel/Dash/dashboard.css">
-
-  <!-- Auth guard eerst laden -->
-  <script type="module" src="/Hotel/Dash/firebase.js"></script>
-  <script type="module" src="/Hotel/Dash/authGuard.js"></script>
+  <link rel="stylesheet" href="./dashboard.css">
 </head>
 
 <body>
 
-<header class="navbar">
-  <h1 class="logo">MyDashboard</h1>
-  <div class="profile-area">
-    <img id="profilePic" src="https://i.pravatar.cc/100">
-  </div>
-</header>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">HOTEL</div>
 
-<main class="main">
-  <h2 class="welcome">Welkom 👋</h2>
+  <div class="user">
+    <img id="avatar" />
+    <div>
+      <div id="name">Loading...</div>
+      <small id="email"></small>
+    </div>
+
+    <button id="logoutBtn">Logout</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <button>🏨 Rooms</button>
+  <button>🍽 Restaurants</button>
+  <button>🎯 Activities</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <h1 class="title">Welcome 👋</h1>
 
   <div class="cards">
-    <div class="card">🏨 Rooms</div>
-    <div class="card">🍽 Restaurants</div>
-    <div class="card">🎯 Activities</div>
+    <div class="card">Rooms</div>
+    <div class="card">Restaurants</div>
+    <div class="card">Activities</div>
   </div>
-</main>
+</div>
 
 <!-- PROFILE MODAL -->
 <div id="profileModal" class="modal hidden">
-  <div class="modal-content">
+  <div class="modalBox">
     <h2>Profile Settings</h2>
 
-    <label>Voornaam</label>
-    <input id="firstName">
-
-    <label>Achternaam</label>
-    <input id="lastName">
-
-    <label>Geboortedatum</label>
+    <input id="firstName" placeholder="First name">
+    <input id="lastName" placeholder="Last name">
     <input type="date" id="birthDate">
 
-    <label>Profielfoto</label>
-    <input type="file" id="photoUpload">
-
-    <label>Taal</label>
     <select id="language">
       <option>Nederlands</option>
       <option>English</option>
+      <option>Deutsch</option>
     </select>
 
-    <label>Thema</label>
-    <select id="themeToggle">
+    <select id="theme">
       <option value="dark">Dark</option>
       <option value="light">Light</option>
     </select>
 
-    <button id="saveProfile">Opslaan</button>
-    <button id="logoutBtn">Uitloggen</button>
+    <button id="saveProfile">Save</button>
+    <button onclick="closeProfile()">Close</button>
   </div>
 </div>
 
-<!-- Scripts onderaan -->
-<script type="module" src="/Hotel/Dash/dashboard.js"></script>
-<script type="module" src="/Hotel/Dash/profileModal.js"></script>
-<script type="module" src="/Hotel/Dash/theme.js"></script>
+<script type="module" src="./firebase.js"></script>
+<script type="module" src="./auth.js"></script>
+<script type="module" src="./profile.js"></script>
+<script type="module" src="./app.js"></script>
 
 </body>
 </html>
