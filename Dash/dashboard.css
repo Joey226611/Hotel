@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+}
+
+/* TOPBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #020617;
+  align-items: center;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* PROFILE */
+#profilePic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid gold;
+}
+
+/* MAIN */
+.main {
+  padding: 40px;
+}
+
+.welcome {
+  font-size: 28px;
+}
+
+/* CARDS */
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #334155;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #0f172a;
+  padding: 25px;
+  border-radius: 16px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
