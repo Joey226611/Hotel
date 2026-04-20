@@ -2,54 +2,84 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Hotel Dashboard</title>
+  <title>Dashboard</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="./dash.css">
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Firebase (nodig voor auth/profile) -->
-  <script type="module" src="./auth-guard.js"></script>
-  <script type="module" src="./profile-ui.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="./Dash/dashboard.css">
+
+  <!-- Firebase -->
+  <script type="module" src="./Dash/firebase.js"></script>
+  <script type="module" src="./Dash/authGuard.js"></script>
 </head>
 
 <body>
 
-  <header class="topbar">
-    <h1>Hotel Dashboard</h1>
+<!-- NAVBAR -->
+<header class="navbar">
+  <h1 class="logo">MyDashboard</h1>
 
-    <div id="profileBtn">
-      <img id="userAvatar" src="https://i.imgur.com/6VBx3io.png">
-    </div>
-  </header>
-
-  <main class="dashboard">
-    <button class="card">Rooms</button>
-    <button class="card">Restaurants</button>
-    <button class="card">Activities</button>
-  </main>
-
-  <!-- Profile modal -->
-  <div id="profileModal" class="modal hidden">
-    <div class="modal-content">
-      <h2>Profile Settings</h2>
-
-      <input id="firstName" placeholder="Voornaam">
-      <input id="lastName" placeholder="Achternaam">
-      <input id="birthDate" type="date">
-      <input id="photoURL" placeholder="Foto URL">
-
-      <select id="language">
-        <option value="nl">Nederlands</option>
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-      </select>
-
-      <button id="saveProfile">Opslaan</button>
-      <button id="logoutBtn">Logout</button>
-    </div>
+  <div class="profile-area">
+    <img id="profilePic" src="https://i.pravatar.cc/100" />
   </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <h2 class="welcome">Welkom 👋</h2>
+
+  <div class="cards">
+    <div class="card">🏨 Rooms</div>
+    <div class="card">🍽 Restaurants</div>
+    <div class="card">🎯 Activities</div>
+  </div>
+
+</main>
+
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="modal hidden">
+  <div class="modal-content">
+
+    <h2>Profile Settings</h2>
+
+    <label>Voornaam</label>
+    <input id="firstName">
+
+    <label>Achternaam</label>
+    <input id="lastName">
+
+    <label>Geboortedatum</label>
+    <input type="date" id="birthDate">
+
+    <label>Profielfoto</label>
+    <input type="file" id="photoUpload">
+
+    <label>Taal</label>
+    <select id="language">
+      <option>Nederlands</option>
+      <option>English</option>
+      <option>Deutsch</option>
+      <option>Français</option>
+    </select>
+
+    <label>Thema</label>
+    <select id="themeToggle">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+
+    <button id="saveProfile">Opslaan</button>
+    <button id="logoutBtn">Uitloggen</button>
+
+  </div>
+</div>
+
+<script type="module" src="./Dash/dashboard.js"></script>
+<script type="module" src="./Dash/profileModal.js"></script>
+<script type="module" src="./Dash/theme.js"></script>
 
 </body>
 </html>
