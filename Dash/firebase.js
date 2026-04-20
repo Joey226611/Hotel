@@ -14,5 +14,3 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-aut
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
-console.log("🔥 Firebase ready");
