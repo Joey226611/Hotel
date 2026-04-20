@@ -3,32 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
-
-  <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="./Dash/dashboard.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/Hotel/Dash/dashboard.css">
 
-  <!-- Firebase -->
-  <script type="module" src="./Dash/firebase.js"></script>
-  <script type="module" src="./Dash/authGuard.js"></script>
+  <!-- Auth guard eerst laden -->
+  <script type="module" src="/Hotel/Dash/firebase.js"></script>
+  <script type="module" src="/Hotel/Dash/authGuard.js"></script>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <header class="navbar">
   <h1 class="logo">MyDashboard</h1>
-
   <div class="profile-area">
-    <img id="profilePic" src="https://i.pravatar.cc/100" />
+    <img id="profilePic" src="https://i.pravatar.cc/100">
   </div>
 </header>
 
-<!-- MAIN -->
 <main class="main">
-
   <h2 class="welcome">Welkom 👋</h2>
 
   <div class="cards">
@@ -36,13 +30,11 @@
     <div class="card">🍽 Restaurants</div>
     <div class="card">🎯 Activities</div>
   </div>
-
 </main>
 
 <!-- PROFILE MODAL -->
 <div id="profileModal" class="modal hidden">
   <div class="modal-content">
-
     <h2>Profile Settings</h2>
 
     <label>Voornaam</label>
@@ -61,8 +53,6 @@
     <select id="language">
       <option>Nederlands</option>
       <option>English</option>
-      <option>Deutsch</option>
-      <option>Français</option>
     </select>
 
     <label>Thema</label>
@@ -73,13 +63,13 @@
 
     <button id="saveProfile">Opslaan</button>
     <button id="logoutBtn">Uitloggen</button>
-
   </div>
 </div>
 
-<script type="module" src="./Dash/dashboard.js"></script>
-<script type="module" src="./Dash/profileModal.js"></script>
-<script type="module" src="./Dash/theme.js"></script>
+<!-- Scripts onderaan -->
+<script type="module" src="/Hotel/Dash/dashboard.js"></script>
+<script type="module" src="/Hotel/Dash/profileModal.js"></script>
+<script type="module" src="/Hotel/Dash/theme.js"></script>
 
 </body>
 </html>
