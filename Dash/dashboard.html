@@ -1,34 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="dash.css">
-</head>
-
 <body>
 
 <script type="module" src="./auth-guard.js"></script>
 
+<!-- 🔝 TOPBAR -->
 <div class="topbar">
   <div class="logo">HOTEL</div>
 
   <div class="user">
-    <img id="userPhoto">
+    <img id="userPhoto" onclick="openProfile()">
     <div>
       <div id="userName"></div>
       <small id="userEmail"></small>
     </div>
-
     <button onclick="logoutUser()">Logout</button>
   </div>
 </div>
 
-<div class="hero">
-  <h1>Welcome 👋</h1>
+<!-- 🧭 SIDEBAR -->
+<div class="sidebar">
+  <button>Rooms</button>
+  <button>Restaurants</button>
+  <button>Activities</button>
+</div>
+
+<!-- 🏨 MAIN -->
+<div class="main">
+  <h1>Dashboard</h1>
+  <p>Select a section</p>
+</div>
+
+<!-- 👤 PROFILE PANEL -->
+<div id="profilePanel" class="profile-panel">
+  <div class="profile-card">
+
+    <h2>Profile Settings</h2>
+
+    <label>Voornaam</label>
+    <input id="firstName">
+
+    <label>Achternaam</label>
+    <input id="lastName">
+
+    <label>Geboortedatum</label>
+    <input type="date" id="birthDate">
+
+    <label>Nieuwe profielfoto</label>
+    <input type="file" id="photoUpload">
+
+    <label>Taal</label>
+    <select id="language">
+      <option>English</option>
+      <option>Nederlands</option>
+      <option>Deutsch</option>
+      <option>Français</option>
+      <option>Español</option>
+    </select>
+
+    <label>Theme</label>
+    <select id="themeSelect">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+
+    <button onclick="saveProfile()">Save Changes</button>
+    <button onclick="closeProfile()">Close</button>
+
+  </div>
 </div>
 
 <script type="module" src="./dashboard.js"></script>
 <script type="module" src="./logout.js"></script>
+<script type="module" src="./profile-ui.js"></script>
+<script type="module" src="./profile-save.js"></script>
+<script type="module" src="./theme.js"></script>
 
 </body>
-</html>
