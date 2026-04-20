@@ -1,12 +1,38 @@
 import { auth } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-onAuthStateChanged(auth, (user) => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  if (!user) return;
+  const welcome = document.querySelector(".welcome");
+  const profilePic = document.getElementById("profilePic");
+  const modal = document.getElementById("profileModal");
+  const logoutBtn = document.getElementById("logoutBtn");
 
-  document.getElementById("userName").innerText = user.displayName;
-  document.getElementById("userEmail").innerText = user.email;
-  document.getElementById("userPhoto").src = user.photoURL;
+  // 🔐 USER CHECK
+  onAuthStateChanged(auth, (user) => {
+    if (!user) return;
+
+    console.log("User:", user.email);
+
+    if (welcome) {
+      welcome.innerText = "Welkom " + (user.displayName || "User");
+    }
+
+    if (profilePic) {
+      profilePic.src = user.photoURL || "https://i.pravatar.cc/100";
+    }
+  });
+
+  // 👤 OPEN PROFILE
+  profilePic?.addEventListener("click", () => {
+    modal?.classList.remove("hidden");
+  });
+
+  // 🚪 LOGOUT
+  logoutBtn?.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "/Hotel/Start/Login.html";
+  });
 
 });
