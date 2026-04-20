@@ -1,11 +1,15 @@
-window.themeSelect?.addEventListener("change", e => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  if (e.target.value === "light") {
-    document.body.style.background = "#f4f4f4";
-    document.body.style.color = "#111";
-  } else {
-    document.body.style.background = "black";
-    document.body.style.color = "white";
-  }
+  const toggle = document.getElementById("themeToggle");
+
+  toggle?.addEventListener("change", (e) => {
+    if (e.target.value === "light") {
+      document.body.style.background = "#f8fafc";
+      document.body.style.color = "#111";
+    } else {
+      document.body.style.background = "#0f172a";
+      document.body.style.color = "#fff";
+    }
+  });
 
 });
