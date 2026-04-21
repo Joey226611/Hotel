@@ -2,7 +2,7 @@ import { auth } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 // wacht tot auth geladen is
-onAuthStateChanged(auth, (user) => 
+onAuthStateChanged(auth, (user) => {
 
   // ❌ Niet ingelogd → terug naar login
   if (!user) {
