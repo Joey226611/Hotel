@@ -1,65 +1,31 @@
-import { loginGoogle, loginEmail, registerEmail } from "./auth.js";
+const errorMsg = document.getElementById("errorMsg");
 
-// DOM READY SAFE WRAPPER
-document.addEventListener("DOMContentLoaded", () => {
+document.getElementById("googleBtn").onclick = async () =>{
+    try{
+        await googleLogin();
+    }catch(err){
+        errorMsg.innerText = err.message;
+    }
+};
 
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
+document.getElementById("registerBtn").onclick = async () =>{
+    const email = document.getElementById("email").value;
+    const pass  = document.getElementById("password").value;
 
-  const loginBtn = document.getElementById("loginBtn");
-  const registerBtn = document.getElementById("registerBtn");
-  const googleBtn = document.getElementById("googleBtn");
-  const errorBox = document.getElementById("errorMsg");
+    try{
+        await registerEmail(email,pass);
+    }catch(err){
+        errorMsg.innerText = err.message;
+    }
+};
 
-  function safeError(msg){
-    if(errorBox) errorBox.innerText = msg;
-    console.log("❌", msg);
-  }
+document.getElementById("loginBtn").onclick = async () =>{
+    const email = document.getElementById("email").value;
+    const pass  = document.getElementById("password").value;
 
-  // GOOGLE
-  if (googleBtn) {
-    googleBtn.addEventListener("click", async () => {
-      try {
-        await loginGoogle();
-        window.location.href = "../Dash/dashboard.html";
-      } catch (e) {
-        safeError(e.message);
-      }
-    });
-  }
-
-  // LOGIN
-  if (loginBtn) {
-    loginBtn.addEventListener("click", async () => {
-      try {
-        if (!email.value || !password.value) {
-          return safeError("Vul email en wachtwoord in");
-        }
-
-        await loginEmail(email.value, password.value);
-        window.location.href = "../Dash/dashboard.html";
-
-      } catch (e) {
-        safeError(e.message);
-      }
-    });
-  }
-
-  // REGISTER
-  if (registerBtn) {
-    registerBtn.addEventListener("click", async () => {
-      try {
-        if (!email.value || !password.value) {
-          return safeError("Vul email en wachtwoord in");
-        }
-
-        await registerEmail(email.value, password.value);
-        safeError("📧 Verificatie mail gestuurd!");
-
-      } catch (e) {
-        safeError(e.message);
-      }
-    });
-  }
-
-});
+    try{
+        await loginEmail(email,pass);
+    }catch(err){
+        errorMsg.innerText = err.message;
+    }
+};
