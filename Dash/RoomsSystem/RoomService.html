@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Rooms Service</title>
+<title>Room Service</title>
 <link rel="stylesheet" href="rooms.css">
 </head>
 
@@ -10,18 +10,19 @@
 
 <nav class="topbar">
   <h1>Room Management</h1>
-  <button class="backBtn" onclick="location.href='../dashboard.html'">← Dashboard</button>
+  <button onclick="location.href='../dashboard.html'">← Dashboard</button>
 </nav>
 
-<section class="controls">
+<div class="controls">
   <button id="addRoomBtn">+ Add Room</button>
-</section>
+</div>
 
-<section id="roomsContainer" class="rooms-grid"></section>
+<div id="roomsContainer" class="rooms-grid"></div>
 
-<!-- scripts -->
+<!-- volgorde is SUPER belangrijk -->
 <script type="module" src="../firebase.js"></script>
 <script type="module" src="../authGuard.js"></script>
 <script type="module" src="rooms.js"></script>
+
 </body>
 </html>
