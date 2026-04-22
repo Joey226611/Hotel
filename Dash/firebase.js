@@ -1,10 +1,14 @@
-// Firebase init (SAFE VERSION)
+// Firebase core
+import { initializeApp, getApps, getApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// ⚠️ PLAK HIER JE EIGEN FIREBASE CONFIG
+import { getFirestore }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// jouw config
  const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
   authDomain: "hotelreception.firebaseapp.com",
@@ -16,7 +20,11 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebas
 };
 
 
-const app = initializeApp(firebaseConfig);
+// ⭐ SUPER BELANGRIJK
+// voorkomt dubbele Firebase init (oorzaak van jouw error)
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+console.log("🔥 Firebase singleton loaded");
