@@ -1,51 +1,57 @@
-import { db, auth } from "../firebase.js";
+import { auth, db } from "../firebase.js";
 import { ADMIN_EMAIL } from "../authGuard.js";
 
-import { collection, addDoc, getDocs }
-from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { 
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { onAuthStateChanged }
-from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const container = document.getElementById("roomsContainer");
 const addBtn = document.getElementById("addRoomBtn");
-const roomsRef = collection(db, "rooms");
 
 let isAdmin = false;
 
-// wacht tot user geladen is
+// wacht op login
 onAuthStateChanged(auth, async (user) => {
 
-  if(!user) return;
+  if (!user) return;
 
-  // check admin
-  if(user.email === ADMIN_EMAIL){
+  if (user.email === ADMIN_EMAIL) {
     isAdmin = true;
   } else {
-    // verberg knop voor normale users
     addBtn.style.display = "none";
   }
 
-  loadRooms();
+  await loadRooms();
 });
 
 
-// ADMIN → kamer toevoegen
+// ⭐ BELANGRIJK: collection pas aanmaken NA firebase init
+function getRoomsRef() {
+  return collection(db, "rooms");
+}
+
+
+// kamer toevoegen (admin only)
 addBtn.onclick = async () => {
 
-  if(!isAdmin){
-    alert("Only admin can create rooms");
+  if (!isAdmin) {
+    alert("Admin only");
     return;
   }
 
   const number = prompt("Room number?");
   const type = prompt("Room type?");
 
-  if(!number || !type) return;
+  if (!number || !type) return;
 
-  await addDoc(roomsRef, {
-    number: number,
-    type: type,
+  await addDoc(getRoomsRef(), {
+    number,
+    type,
     status: "Available"
   });
 
@@ -54,10 +60,10 @@ addBtn.onclick = async () => {
 
 
 // kamers laden
-async function loadRooms(){
+async function loadRooms() {
   container.innerHTML = "";
 
-  const snapshot = await getDocs(roomsRef);
+  const snapshot = await getDocs(getRoomsRef());
 
   snapshot.forEach(doc => {
     const room = doc.data();
