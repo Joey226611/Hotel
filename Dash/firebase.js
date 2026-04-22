@@ -1,6 +1,10 @@
+// Firebase init (SAFE VERSION)
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// ⚠️ PLAK HIER JE EIGEN FIREBASE CONFIG
  const firebaseConfig = {
   apiKey: "AIzaSyBeidcBbNTGKb_GtXEad20Xpug1Se9e9x0",
   authDomain: "hotelreception.firebaseapp.com",
@@ -13,6 +17,6 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-aut
 
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
 
-console.log("🔥 Dashboard Firebase ready");
+export const auth = getAuth(app);
+export const db = getFirestore(app);
