@@ -2,31 +2,40 @@ import { auth } from "./firebase.js";
 import { onAuthStateChanged, signOut } 
 from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-const ADMIN_EMAIL = "jey3602@gmail.com";
+export const ADMIN_EMAIL = "jey3602@gmail.com";
 
 onAuthStateChanged(auth, user => {
 
-  if(!user){
+  // niet ingelogd → terug naar login
+  if (!user) {
     location.href = "../Start/Login.html";
     return;
   }
 
-  // toon dashboard pas wanneer user bestaat
+  // pagina zichtbaar maken (bestaat op elke pagina)
   document.body.style.visibility = "visible";
 
-  // admin knop zichtbaar maken
-  if(user.email === ADMIN_EMAIL){
-    document.getElementById("adminBtn").style.display = "block";
+  // ===== OPTIONAL ELEMENTS (bestaan niet op elke pagina!) =====
+  const logoutBtn = document.getElementById("logoutBtn");
+  const profilePic = document.getElementById("profilePic");
+  const adminBtn = document.getElementById("adminBtn");
+
+  // logout knop alleen uitvoeren als hij bestaat
+  if (logoutBtn) {
+    logoutBtn.onclick = async () => {
+      await signOut(auth);
+      location.href = "../Start/Login.html";
+    };
   }
 
-  // profielfoto laden
-  const pic = document.getElementById("profilePic");
-  pic.src = user.photoURL || "https://i.imgur.com/6VBx3io.png";
+  // profielfoto alleen als element bestaat
+  if (profilePic) {
+    profilePic.src = user.photoURL || "https://i.imgur.com/6VBx3io.png";
+  }
 
-  // logout
-  document.getElementById("logoutBtn").onclick = async () => {
-    await signOut(auth);
-    location.href = "../Start/Login.html";
-  };
+  // admin knop tonen indien aanwezig
+  if (adminBtn && user.email === ADMIN_EMAIL) {
+    adminBtn.style.display = "block";
+  }
 
 });
