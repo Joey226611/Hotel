@@ -1,20 +1,10 @@
-const btn = document.getElementById("themeBtn");
+const btn = document.getElementById("themeToggle");
 
-if (btn) {
-  btn.onclick = () => {
+let theme = localStorage.getItem("theme") || "dark";
+document.body.classList.toggle("light", theme === "light");
 
-    document.body.classList.toggle("lightTheme");
-
-    // opslaan in browser
-    const isLight = document.body.classList.contains("lightTheme");
-    localStorage.setItem("theme", isLight ? "light" : "dark");
-  };
-}
-
-// theme laden bij start
-window.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "light") {
-    document.body.classList.add("lightTheme");
-  }
-});
+btn.onclick = () => {
+  document.body.classList.toggle("light");
+  const newTheme = document.body.classList.contains("light") ? "light" : "dark";
+  localStorage.setItem("theme", newTheme);
+};
