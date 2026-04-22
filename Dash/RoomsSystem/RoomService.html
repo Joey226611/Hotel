@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rooms Service</title>
+<link rel="stylesheet" href="rooms.css">
+</head>
+
+<body style="visibility:hidden">
+
+<nav class="topbar">
+  <h1>Room Management</h1>
+  <button class="backBtn" onclick="location.href='../dashboard.html'">← Dashboard</button>
+</nav>
+
+<section class="controls">
+  <button id="addRoomBtn">+ Add Room</button>
+</section>
+
+<section id="roomsContainer" class="rooms-grid"></section>
+
+<!-- scripts -->
+<script type="module" src="../firebase.js"></script>
+<script type="module" src="../authGuard.js"></script>
+<script type="module" src="rooms.js"></script>
+</body>
+</html>
