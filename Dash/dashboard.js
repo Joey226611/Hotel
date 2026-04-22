@@ -4,7 +4,7 @@ console.log("Dashboard loaded");
 
 // menu knoppen
 document.getElementById("roomsBtn").onclick = () => {
-  alert("Rooms page coming soon 🛏");
+  location.href = "./RoomsSystem/RoomService.html";
 };
 
 document.getElementById("restaurantsBtn").onclick = () => {
