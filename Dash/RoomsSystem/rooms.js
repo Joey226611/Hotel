@@ -4,7 +4,7 @@ import { ADMIN_EMAIL } from "../authGuard.js";
 import { 
   collection,
   addDoc,
-  getDocs
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { onAuthStateChanged }
@@ -14,68 +14,61 @@ const container = document.getElementById("roomsContainer");
 const addBtn = document.getElementById("addRoomBtn");
 
 let isAdmin = false;
+const roomsRef = collection(db, "rooms");
 
-// wacht op login
-onAuthStateChanged(auth, async (user) => {
-
+onAuthStateChanged(auth, user => {
   if (!user) return;
 
+  // admin check
   if (user.email === ADMIN_EMAIL) {
     isAdmin = true;
   } else {
     addBtn.style.display = "none";
   }
 
-  await loadRooms();
+  // realtime rooms listener 🔥
+  listenToRooms();
 });
 
 
-// ⭐ BELANGRIJK: collection pas aanmaken NA firebase init
-function getRoomsRef() {
-  return collection(db, "rooms");
-}
-
-
-// kamer toevoegen (admin only)
+// ADMIN → kamer toevoegen
 addBtn.onclick = async () => {
 
-  if (!isAdmin) {
-    alert("Admin only");
-    return;
-  }
+  if (!isAdmin) return;
 
   const number = prompt("Room number?");
   const type = prompt("Room type?");
 
   if (!number || !type) return;
 
-  await addDoc(getRoomsRef(), {
+  await addDoc(roomsRef, {
     number,
     type,
-    status: "Available"
+    status: "Available",
+    createdAt: Date.now()
   });
-
-  location.reload();
 };
 
 
-// kamers laden
-async function loadRooms() {
-  container.innerHTML = "";
+// realtime kamers laden
+function listenToRooms() {
 
-  const snapshot = await getDocs(getRoomsRef());
+  onSnapshot(roomsRef, snapshot => {
+    container.innerHTML = "";
 
-  snapshot.forEach(doc => {
-    const room = doc.data();
+    snapshot.forEach(doc => {
+      const room = doc.data();
 
-    const div = document.createElement("div");
-    div.className = "room-card";
-    div.innerHTML = `
-      <h2>Room ${room.number}</h2>
-      <p>Type: ${room.type}</p>
-      <p>Status: ${room.status}</p>
-    `;
+      const div = document.createElement("div");
+      div.className = "room-card";
+      div.innerHTML = `
+        <h2>Room ${room.number}</h2>
+        <p>Type: ${room.type}</p>
+        <p>Status: ${room.status}</p>
+      `;
 
-    container.appendChild(div);
+      container.appendChild(div);
+    });
   });
+
 }
