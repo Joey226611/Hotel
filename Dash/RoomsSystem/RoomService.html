@@ -10,16 +10,56 @@
 
 <nav class="topbar">
   <h1>Room Management</h1>
-  <button onclick="location.href='../dashboard.html'">← Dashboard</button>
+  <button class="backBtn" onclick="location.href='../dashboard.html'">← Dashboard</button>
 </nav>
 
-<div class="controls">
-  <button id="addRoomBtn">+ Add Room</button>
+<section class="controls">
+  <button id="addRoomBtn" class="goldBtn">+ Add Room</button>
+</section>
+
+<section id="roomsContainer" class="rooms-grid"></section>
+
+<!-- ADD ROOM MODAL -->
+<div id="addModal" class="modal hidden">
+  <div class="modalBox">
+    <h2>Create Room</h2>
+    <input id="roomNumber" placeholder="Room number">
+    <input id="roomType" placeholder="Room type">
+    <input id="roomPrice" placeholder="Price per night">
+    <button id="createRoomBtn" class="goldBtn">Create</button>
+    <button onclick="closeAddModal()">Cancel</button>
+  </div>
 </div>
 
-<div id="roomsContainer" class="rooms-grid"></div>
+<!-- SETTINGS MODAL -->
+<div id="settingsModal" class="modal hidden">
+  <div class="modalBox">
+    <h2>Room Settings</h2>
 
-<!-- volgorde is SUPER belangrijk -->
+    <label>Status</label>
+    <select id="statusSelect">
+      <option>Available</option>
+      <option>Occupied</option>
+      <option>Cleaning</option>
+    </select>
+
+    <label>Guest name</label>
+    <input id="guestInput">
+
+    <label>Nights</label>
+    <input id="nightsInput" type="number">
+
+    <hr>
+
+    <h3>Permissions (admin)</h3>
+    <label><input type="checkbox" id="permStatus"> Users can edit status</label>
+    <label><input type="checkbox" id="permGuest"> Users can edit guest</label>
+
+    <button id="saveSettingsBtn" class="goldBtn">Save</button>
+    <button id="deleteRoomBtn" class="dangerBtn">Delete Room</button>
+  </div>
+</div>
+
 <script type="module" src="../firebase.js"></script>
 <script type="module" src="../authGuard.js"></script>
 <script type="module" src="rooms.js"></script>
